@@ -32,7 +32,7 @@ Start up your container, and have Serverless setup a new project. **We will make
     $ ENV=dev make shell
     # Now you're in your docker container
     > sls create -t aws-python -p serverless -n your-project-name
-    
+
 You may also use Python3 by replacing the `-t` value in the instruction above.
 
 ## Deployments
@@ -46,14 +46,27 @@ Anytime there are changes to AWS resources, you will need to use this command. Y
 As you are making changes to your code, you can more quickly deploy individual functions which skip the step of managing AWS resources by using:
 
     make deploy function=FunctionName
-   
+
 ...where `FunctionName` would be a single entry under the `functions` section of your `serverless.yml` file.
- 
+
 See the Serverless docs about [deploying functions if you'd like more details](https://serverless.com/framework/docs/providers/aws/cli-reference/deploy-function/)
 
+## Installing Packages
+
+If you want to add additional python packages to your serverless project, you will need to add them to the requirements.txt file and then run `make libs` from the root project directory. Additionally, you'll want to add the following 4 lines to the top of your handler.py file:
+
+```python
+import os
+import sys
+
+CWD = os.path.dirname(os.path.realpath(__file__))
+sys.path.insert(0, os.path.join(CWD, "lib"))
+```
+
+This ensures that your deployed lambda function has access to the packages stored in the `lib` directory.
 # Addendum
 
-As with most templating projects, this setup is really just a small collection of patterns and wrappers around existing tools.  If you look at the contents of the `Makefile`, you'll see the nitty gritty on how this all works.  Much or all of it can be customized to fit your needs.  From experience, we at [Very](https://verypossible.com) have found this to be a lovely way of 
+As with most templating projects, this setup is really just a small collection of patterns and wrappers around existing tools.  If you look at the contents of the `Makefile`, you'll see the nitty gritty on how this all works.  Much or all of it can be customized to fit your needs.  From experience, we at [Very](https://verypossible.com) have found this to be a lovely way of
 
 1. managing multiple environments/deployments from the same code base
 2. iterating on serverless projects, with quick and independent deployments
