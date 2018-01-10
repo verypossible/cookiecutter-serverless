@@ -53,7 +53,7 @@ See the Serverless docs about [deploying functions if you'd like more details](h
 
 ## Installing Packages
 
-If you want to add additional python packages to your serverless project, you will need to add them to the requirements.txt file and then run `make libs` from the root project directory. Additionally, you'll want to add the following 4 lines to the top of your handler.py file:
+If you want to add additional python packages to your serverless project, you will need to add them to the requirements.txt file and then run `make libs` from the root project directory. Additionally, you'll want to add the following 4 lines to the top of your ``handler.py`` file:
 
 ```python
 import os
