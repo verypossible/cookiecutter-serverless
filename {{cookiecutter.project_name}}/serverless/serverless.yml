@@ -1,0 +1,88 @@
+service: {{cookiecutter.project_name}}
+
+provider:
+  name: aws
+  frameworkVersion: "={{cookiecutter.serverless_version}}"
+  logRetentionInDays: 14
+  region: ${env:AWS_REGION}
+{%- if cookiecutter.python_version == "3.6" %}
+  runtime: python3.6
+{%- else %}
+  runtime: python2.7
+{%- endif %}
+  stage: ${env:ENV}
+  timeout: 6
+  versionFunctions: false
+  # If you are running inside of a VPC, you'll need to include these allow statements
+  # to that your lambda functions can create ENIs which allow it to connect to the outside world.
+  # iamRoleStatements:
+  #   - Effect: "Allow"
+  #     Action:
+  #       - "ec2:CreateNetworkInterface"
+  #       - "ec2:DescribeNetworkInterfaces"
+  #       - "ec2:DeleteNetworkInterface"
+  #     Resource: "*"
+
+#  Define env vars here. Using the `env` function will pull the value from your host system.
+#  environment:
+#    YOUR_VARIABLE: ${env:YOUR_VARIABLE}
+
+# These are some sane excludes for Python
+package:
+  exclude:
+    - "**/__pycache__/**"
+    - "*.pyc"
+    - "*.swp"
+    - "package-lock.json"
+    - "package.json"
+    - .git/**
+    - __pycache__/**
+    - node_modules/**
+
+# These are some good plugins for Python. Note, you will need to npm install them before use:
+#
+#  npm install --save-dev serverless-sentry
+#
+# plugins:
+#   - serverless-plugin-vpc-eni-cleanup
+#   - serverless-sentry
+
+# If using sentry, these are sane defaults which you can use
+# custom:
+#   sentry:
+#     dsn: ${env:SENTRY_DSN}
+#     environment: ${env:ENV}
+#     organization: YOUR-ORG-NAME
+#     project: {{cookiecutter.project_name}}
+#     authToken: ${env:SENTRY_AUTH_TOKEN}
+#     release:
+#       version: git
+
+
+# you can add CloudFormation resource templates here
+#resources:
+#  Resources:
+#    NewResource:
+#      Type: AWS::S3::Bucket
+#      Properties:
+#        BucketName: my-new-bucket
+#  Outputs:
+#     NewOutput:
+#       Description: "Description for the output"
+#       Value: "Some output value"
+
+functions:
+  hello:
+    handler: handler.hello
+#    The following are a few example events you can configure
+#    Check the event documentation for details
+#       https://serverless.com/framework/docs/providers/aws/guide/events/
+#    events:
+#      - http:
+#          path: users/create
+#          method: get
+#      - s3: ${env:BUCKET}
+#      - schedule: rate(10 minutes)
+#      - schedule: cron(0 6 * * ? *)
+#      - sns: greeter-topic
+#      - stream: arn:aws:dynamodb:region:XXXXXX:table/foo/stream/1970-01-01T00:00:00.000

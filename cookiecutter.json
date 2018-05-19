@@ -1,15 +1,6 @@
 {
-    "project_name": "test",
-    "serverless_version": [
-      "1.25.0",
-      "1.25.0-python3",
-      "1.24.0",
-      "1.24.0-python3",
-      "1.23.0",
-      "1.23.0-python3",
-      "1.22.0",
-      "1.22.0-python3",
-      "1.21.0",
-      "1.21.0-python3"
-    ]
+  "project_name": "test",
+  "serverless_version": ["1.27.2", "1.26.1", "1.25.0"],
+  "python_version": ["3.6", "2.7"],
+  "AWS_REGION": ["us-east-2", "us-east-1", "us-west-2"]
 }

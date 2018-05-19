@@ -8,6 +8,7 @@
 # 
 # Note, you will *always* need AWS settings, in order for the serverless 
 # deployments to work. Add values to the settings below.
-AWS_DEFAULT_REGION=
+AWS_REGION={{cookiecutter.AWS_REGION}}
+AWS_DEFAULT_REGION={{cookiecutter.AWS_REGION}}
 AWS_SECRET_ACCESS_KEY=
 AWS_ACCESS_KEY_ID=
