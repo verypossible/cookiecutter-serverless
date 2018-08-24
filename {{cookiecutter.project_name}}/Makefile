@@ -1,8 +1,4 @@
-{%- if cookiecutter.serverless_version == '1.27.2' -%}
-	{%- if cookiecutter.python_version == '3.6' -%}
-NAME = "verypossible/serverless:{{cookiecutter.serverless_version}}"
-	{%- endif %}
-{%- elif cookiecutter.python_version == '3.6' -%}
+{%- if cookiecutter.serverless_version == '1.26.1' -%}
 NAME = "verypossible/serverless:{{cookiecutter.serverless_version}}-python3"
 {%- else -%}
 NAME = "verypossible/serverless:{{cookiecutter.serverless_version}}"

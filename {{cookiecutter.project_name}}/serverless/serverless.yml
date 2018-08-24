@@ -5,11 +5,7 @@ provider:
   frameworkVersion: "={{cookiecutter.serverless_version}}"
   logRetentionInDays: 14
   region: ${env:AWS_REGION}
-{%- if cookiecutter.python_version == "3.6" %}
   runtime: python3.6
-{%- else %}
-  runtime: python2.7
-{%- endif %}
   stage: ${env:ENV}
   timeout: 6
   versionFunctions: false
