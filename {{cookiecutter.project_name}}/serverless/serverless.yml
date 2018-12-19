@@ -67,9 +67,22 @@ package:
 #       Description: "Description for the output"
 #       Value: "Some output value"
 
+# Set our lib directory to be installed as a layer. This makes deployments for individual functions
+# extremely fast:
+#
+#   make deploy function=function_name
+#
+# Note that a full deployment will re-deploy the layer due to the way that CloudFormation works.
+layers:
+  {{cookiecutter.project_name|title}}Lib:
+    name: {{cookiecutter.project_name|title}}Lib-${env:ENV}
+    path: lib
+
 functions:
   hello:
     handler: handler.hello
+    layers:
+      - Ref: {{cookiecutter.project_name|title}}LibLambdaLayer
 #    The following are a few example events you can configure
 #    Check the event documentation for details
 #       https://serverless.com/framework/docs/providers/aws/guide/events/

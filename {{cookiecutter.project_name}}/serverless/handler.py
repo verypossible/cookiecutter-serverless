@@ -2,13 +2,11 @@
 import json
 import sys
 
-from pathlib import Path
-
 # pylint: disable=wrong-import-position
 
-# Munge our sys path so libs can be found
-LIB = Path(__file__).resolve().parent / 'lib'
-sys.path.insert(0, str(LIB))
+# Update our sys path libs stored in our Layer can be found. All imports for additional libraries
+# should come *after* this line.
+sys.path.insert(0, '/opt')
 
 
 def hello(event, context):
